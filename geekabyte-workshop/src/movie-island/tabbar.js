@@ -3,16 +3,21 @@ import React, { Component } from 'react';
 class Tabbar extends Component {
   constructor(props) {
     super(props)
-    this.onTabChange = this.onTabChange.bind(this)
-    this.state = { selectedType: "now_showing"}
+    // this.onTabChange = this.onTabChange.bind(this)
+    this.state = { selectedType: this.props.selectedType
+    }
     //By default, now showing is selected
   }
 
-  onTabChange(event) {
+  onTabChange = (event) => {
     const selectedType = event.target.getAttribute("data-type")
     this.setState({
       selectedType
     })
+
+    if (this.props.onTabSelected) {
+      this.props.onTabSelected(selectedType)
+    }
   }
 
   render() {
